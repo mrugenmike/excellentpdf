@@ -1,7 +1,5 @@
 package com.ee.excellentpdf;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,11 +22,11 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class XlsxFileReader {
+public class XlsxFileConvertor {
 
-	public static void main(String[] args) throws DocumentException,
+	public void convert(String fileName) throws DocumentException,
 			IOException {
-		File file = new File("ExcelFile/sal.xls");
+		File file = new File(fileName);
 		FileInputStream input_document = new FileInputStream(file);
 		HSSFWorkbook my_xls_workbook = new HSSFWorkbook(input_document);
 
@@ -92,7 +90,6 @@ public class XlsxFileReader {
 						} else {
 							cellValue = cell.getStringCellValue();
 						}
-						System.out.println(cellValue);
 						table_cell = new PdfPCell(new Phrase(cellValue));
 						my_table.addCell(table_cell);
 						break;
@@ -105,7 +102,6 @@ public class XlsxFileReader {
 			iText_xls_2_pdf.close();
 			i++;
 		}
-		System.out.println("Done!");
 		// we created our pdf file..
 		input_document.close(); // close xls
 	}
