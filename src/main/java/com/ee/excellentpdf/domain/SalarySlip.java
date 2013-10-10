@@ -1,109 +1,106 @@
 package com.ee.excellentpdf.domain;
 
+import java.util.Map;
+
 public class SalarySlip {
     private String name;
-    private String month;
-    private String daysInMonth;
-    private String daysPresent;
+    private Double month;
+    private Double daysInMonth;
+    private Double daysPresent;
     private String designation;
-    private String backAccountNumber;
-    private String monthlyCTC;
-    private String basic;
-    private String lta;
-    private String hra;
+    private String bankAccountNumber;
+    private Double monthlyCTC;
+    private Double basic;
+    private Double lta;
+    private Double hra;
     private Double conveyanceAllowance;
-    private String teleExpense;
-    String medicalReimbursement;
-    String incrementDifference;
-    String leaveEncashment;
-    String specialAllowance;
-    String referralBonus;
-    String totalEarn;
-    Double professionalTax;
-    Double pf;
-    Double tds;
-    Double totalDeduction;
-    Double totalSalary;
+    private Double teleExpense;
+    private Double medicalReimbursement;
+    private Double incrementDifference;
+    private Double leaveEncashment;
+    private Double  specialAllowance;
+    private Double referralBonus;
+    private Double totalEarn;
+    private Double professionalTax;
+    private Double pf;
+    private Double tds;
+    private Double totalDeduction;
+    private Double totalSalary;
+
+    public SalarySlip(Map<String, Object> mapOfCellsValue) {
+        this.name = (String)mapOfCellsValue.get("Name");
+        this.month = (Double) mapOfCellsValue.get("Month");
+        this.daysInMonth = (Double) mapOfCellsValue.get("Days in a month");
+        this.daysPresent=(Double) mapOfCellsValue.get("Days Present");
+        this.designation = (String) mapOfCellsValue.get("Designation");
+        this.bankAccountNumber =(String) mapOfCellsValue.get("Bank A/c No");
+        this.monthlyCTC = (Double) mapOfCellsValue.get("Monthly CTC");
+        this.basic = (Double)mapOfCellsValue.get("Basic");
+        this.hra = (Double)mapOfCellsValue.get("HRA");
+        this.lta = (Double) mapOfCellsValue.get("LTA");
+        this.conveyanceAllowance = (Double)mapOfCellsValue.get("Con Allow");
+        this.teleExpense = (Double) mapOfCellsValue.get("Tele Exp Reimb");
+        this.medicalReimbursement = (Double) mapOfCellsValue.get("Medical Reimb");
+        this.incrementDifference = (Double) mapOfCellsValue.get("Increment Diffrence");
+        this.leaveEncashment = (Double) mapOfCellsValue.get("Leave Encashment");
+        this.specialAllowance = (Double) mapOfCellsValue.get("Spcl Allow");
+        this.referralBonus = (Double) mapOfCellsValue.get("Referal Bonus & Bonus");
+        this.totalEarn = (Double) mapOfCellsValue.get("Total Earn");
+        this.professionalTax = (Double) mapOfCellsValue.get("P Tax");
+        this.pf = (Double) mapOfCellsValue.get("PF");
+        this.tds = (Double) mapOfCellsValue.get("TDS");
+        this.totalDeduction = (Double) mapOfCellsValue.get("Total Ded");
+        this.totalSalary = (Double) mapOfCellsValue.get("Total Salary");
+
+
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMonth() {
+    public Double getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDaysInMonth() {
+    public Double getDaysInMonth() {
         return daysInMonth;
     }
 
-    public void setDaysInMonth(String daysInMonth) {
-        this.daysInMonth = daysInMonth;
-    }
 
-    public String getDaysPresent() {
+    public Double getDaysPresent() {
         return daysPresent;
     }
 
-    public void setDaysPresent(String daysPresent) {
-        this.daysPresent = daysPresent;
-    }
 
     public String getDesignation() {
         return designation;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
     }
 
-    public String getBackAccountNumber() {
-        return backAccountNumber;
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
     }
 
-    public void setBackAccountNumber(String backAccountNumber) {
-        this.backAccountNumber = backAccountNumber;
-    }
-
-    public String getMonthlyCTC() {
+    public Double getMonthlyCTC() {
         return monthlyCTC;
     }
 
-    public void setMonthlyCTC(String monthlyCTC) {
-        this.monthlyCTC = monthlyCTC;
-    }
-
-    public String getBasic() {
+    public Double getBasic() {
         return basic;
     }
 
-    public void setBasic(String basic) {
-        this.basic = basic;
-    }
-
-    public String getLta() {
+    public Double getLta() {
         return lta;
     }
 
-    public void setLta(String lta) {
-        this.lta = lta;
-    }
-
-    public String getHra() {
+    public Double getHra() {
         return hra;
     }
 
-    public void setHra(String hra) {
-        this.hra = hra;
-    }
 
     public Double getConveyanceAllowance() {
         return conveyanceAllowance;
@@ -113,11 +110,7 @@ public class SalarySlip {
         this.conveyanceAllowance = conveyanceAllowance;
     }
 
-    public String getTeleExpense() {
+    public Double getTeleExpense() {
         return teleExpense;
-    }
-
-    public void setTeleExpense(String teleExpense) {
-        this.teleExpense = teleExpense;
     }
 }
