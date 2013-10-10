@@ -1,4 +1,4 @@
-package main.java.com.ee.excellentpdf;
+package com.ee.excellentpdf;
 
 import java.io.BufferedReader;
 import java.io.IOException;

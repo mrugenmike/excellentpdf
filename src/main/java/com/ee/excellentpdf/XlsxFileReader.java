@@ -1,4 +1,4 @@
-package main.java.com.ee.excellentpdf;
+package com.ee.excellentpdf;
 
 import java.io.File;
 import java.io.FileInputStream;
