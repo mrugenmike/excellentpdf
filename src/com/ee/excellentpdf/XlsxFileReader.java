@@ -23,7 +23,7 @@ public class XlsxFileReader {
 	public static void main(String[] args) throws DocumentException, IOException {
 		// First we read the Excel file in binary format into FileInputStream
 		FileInputStream input_document = new FileInputStream(new File(
-				"ExcelFile/xl.xls"));
+				"ExcelFile/xl1.xls"));
 		// Read workbook into HSSFWorkbook
 		HSSFWorkbook my_xls_workbook = new HSSFWorkbook(input_document);
 		// Read worksheet into HSSFSheet
