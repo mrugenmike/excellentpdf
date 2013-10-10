@@ -28,7 +28,7 @@ public class XlsxFileReader {
 		// Read workbook into HSSFWorkbook
 		HSSFWorkbook my_xls_workbook = new HSSFWorkbook(input_document);
 		// Read worksheet into HSSFSheet
-		
+
 		int i = 0;
 		while (i < my_xls_workbook.getNumberOfSheets()) {
 			HSSFSheet my_worksheet = my_xls_workbook.getSheetAt(i);
@@ -37,7 +37,7 @@ public class XlsxFileReader {
 			// We will create output PDF document objects at this point
 			Document iText_xls_2_pdf = new Document();
 			PdfWriter.getInstance(iText_xls_2_pdf, new FileOutputStream(
-					"PDFs/Excel2PDF_Output"+i+".pdf"));
+					"PDFs/" + my_xls_workbook.getSheetName(i) + ".pdf"));
 			iText_xls_2_pdf.open();
 			// we have two columns in the Excel sheet, so we create a PDF table
 			// with
