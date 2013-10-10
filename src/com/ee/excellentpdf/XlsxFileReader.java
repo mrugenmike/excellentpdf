@@ -33,7 +33,7 @@ public class XlsxFileReader {
 		// We will create output PDF document objects at this point
 		Document iText_xls_2_pdf = new Document();
 		PdfWriter.getInstance(iText_xls_2_pdf, new FileOutputStream(
-				"Excel2PDF_Output.pdf"));
+				"PDFs/Excel2PDF_Output.pdf"));
 		iText_xls_2_pdf.open();
 		// we have two columns in the Excel sheet, so we create a PDF table with
 		// two columns
