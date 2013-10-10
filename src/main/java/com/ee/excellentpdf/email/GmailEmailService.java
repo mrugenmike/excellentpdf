@@ -31,7 +31,6 @@ public class GmailEmailService implements EmailService {
     }
 
 
-    @Override
     public boolean sendMail(File attachment, String emailId, String subject, String body) {
         final Session session = Session.getInstance(props,passwordAuthenticator);
 
