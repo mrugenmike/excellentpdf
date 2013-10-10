@@ -32,7 +32,7 @@ public class GmailEmailService implements EmailService {
 
 
     @Override
-    public void sendMail(File attachment, String emailId, String subject, String body) {
+    public boolean sendMail(File attachment, String emailId, String subject, String body) {
         final Session session = Session.getInstance(props,passwordAuthenticator);
 
         try {
@@ -55,8 +55,9 @@ public class GmailEmailService implements EmailService {
 
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            return false;
         }
+        return true;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.ee.excellentpdf.email;
 
+import junit.framework.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class GmailEmailServiceTest {
     public void itShouldSendEmailWithAttachment() throws URISyntaxException {
         EmailService service = new GmailEmailService("excellentpdf@gmail.com", "pdfuser@123");
         File salarySlip = getSalarySlip();
-        service.sendMail(salarySlip, "rraut@equalexperts.com", "Salary Slip", "Hello renuka!!");
+        final boolean sent = service.sendMail(salarySlip, "rraut@equalexperts.com", "Salary Slip", "\n Hello renuka!!\n");
+        Assert.assertTrue(sent);
     }
 }
