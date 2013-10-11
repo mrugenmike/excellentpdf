@@ -1,5 +1,9 @@
 package com.ee.excellentpdf.email;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -11,17 +15,19 @@ import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.util.Properties;
 
+@Component
 public class GmailEmailService implements EmailService {
 
-    final private String username;
-    final private String password;
+      private String username;
+      private String password;
 
-    final Properties props ;
-    final MyPasswordAuthenticator passwordAuthenticator;
 
-    public GmailEmailService(String username, String password){
-        this.username = username;
-        this.password = password;
+     Properties props ;
+     MyPasswordAuthenticator passwordAuthenticator;
+
+    public GmailEmailService(){
+        this.username = "excellentpdf@gmail.com";
+        this.password = "pdfuser@123";
         props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

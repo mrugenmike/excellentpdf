@@ -20,7 +20,7 @@ public class GmailEmailServiceTest {
 
     @Test
     public void itShouldSendEmailWithAttachment() throws URISyntaxException {
-        EmailService service = new GmailEmailService("excellentpdf@gmail.com", "pdfuser@123");
+        EmailService service = new GmailEmailService();
         File salarySlip = new File("src/test/resources/salarySlip.pdf");
         boolean sent = service.sendMail(salarySlip, "rraut@equalexperts.com", "Salary Slip", "\n Hello renuka!!\n");
 

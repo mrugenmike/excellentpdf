@@ -24,8 +24,9 @@ success: function()
                 },
 complete: function(response)
             {
+
                 $("#message").html("<font color='green'>"+response.responseText+"</font>");
-                },
+            },
 error: function()
             {
                 $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
@@ -37,3 +38,11 @@ error: function()
 $("#myForm").ajaxForm(options);
 
 });
+
+function sendEmail(){
+    $.ajax({
+        url:"email"
+    }).done(function(){
+           $("#message").html("<b>Mail Sent</b>")
+        });
+}

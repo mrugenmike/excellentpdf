@@ -1,7 +1,9 @@
 package com.ee.excellentpdf.email;
 
-import java.io.File;
+import org.springframework.stereotype.Service;
 
+import java.io.File;
+@Service
 public interface EmailService  {
     public boolean sendMail(File attachment,String emailId,String subject,String body);
 }
