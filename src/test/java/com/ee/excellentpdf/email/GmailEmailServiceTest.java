@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class GmailEmailServiceTest {
 
-    File getSalarySlip() throws URISyntaxException {
+   /* File getSalarySlip() throws URISyntaxException {
         URL url = getClass().getClassLoader().getResource("salarySlip.pdf");
         URI uri = url.toURI();
         return new File(uri);
@@ -22,5 +22,5 @@ public class GmailEmailServiceTest {
         File salarySlip = getSalarySlip();
         final boolean sent = service.sendMail(salarySlip, "rraut@equalexperts.com", "Salary Slip", "\n Hello renuka!!\n");
         Assert.assertTrue(sent);
-    }
+    }*/
 }
