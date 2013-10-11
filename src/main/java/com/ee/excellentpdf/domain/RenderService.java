@@ -21,7 +21,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class RenderService {
-	private static String FILE = "PDFs/FirstPdf.pdf";
+	
+
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
 			Font.BOLD);
 	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -31,34 +32,54 @@ public class RenderService {
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
 
-	public void renderPDF(List<SalarySlip> salarySlips) {
+	public List<String> renderPDF(List<SalarySlip> salarySlips) {
 
+		List<String> filenames = new ArrayList<String>();
 		try {
+			for (SalarySlip salarySlip : salarySlips) {
+				
+			
+
+			String filename  = salarySlip.getName();
+			String[] temp = filename.split(" ");
+			filenames.add(filename);
+			System.out.println("temp1"+temp[0]);
+			System.out.println("temp1"+temp[1]);
+			
+			 String FILE = "PDFs/"+temp[0]+"."+temp[1]+".pdf";
+			
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(FILE));
 			document.open();
 			addMetaData(document);
-			addContent(document, salarySlips);
+			addContent(document, salarySlip);
 			document.close();
+			
+			System.out.println(filenames);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
+		
 
 	}
 
+	
 	private void addContent(Document document,
-			List<SalarySlip> salarySlips) throws DocumentException {
+			SalarySlip salarySlip) throws DocumentException {
 		Anchor anchor = new Anchor("Salary Slip", catFont);
 		anchor.setName("SALARY SLIP");
 
-		createTable(document, salarySlips);
+		createTable(document, salarySlip);
 
 	}
 
-	private void createTable(Document document,
-			List<SalarySlip> salarySlips) throws DocumentException {
 
-		for (SalarySlip salarySlip : salarySlips) {
+	private void createTable(Document document,
+			SalarySlip salarySlip) throws DocumentException {
+
+	
 
 			PdfPTable table = new PdfPTable(2);
 
@@ -94,11 +115,11 @@ public class RenderService {
 			table.addCell("Conveyance Allowance");
 			table.addCell((salarySlip.getConveyanceAllowance()).toString());
 			
-			table.addCell("Monthly CTC");
+			table.addCell("Net Pay");
 			table.addCell((salarySlip.getMonthlyCTC()).toString());
 
 			document.add(table);
-		}
+		
 	}
 
 	private static void addMetaData(Document document) {
@@ -113,18 +134,18 @@ public class RenderService {
 		ArrayList<SalarySlip> salarySlips = new ArrayList<SalarySlip>();
 
 		Map<String, Object> mapOfCellsValue = new HashMap<String, Object>();
-		mapOfCellsValue.put("Name", "Tejas");
+		mapOfCellsValue.put("Name", "Rashmi Parab");
 		mapOfCellsValue.put("Basic", 400.00);
 		mapOfCellsValue.put("HRA", 8000.00);
-		mapOfCellsValue.put("Conveyance Allowance",800.00);
+		mapOfCellsValue.put("Con Allow",800.00);
+		mapOfCellsValue.put("Bank A/c No", "235326445.00");
+		mapOfCellsValue.put("LTA", 8000.00);
+		mapOfCellsValue.put("Monthly CTC", 346878.00);
+		mapOfCellsValue.put("Days Present",35.0);
 
 		SalarySlip salarySlip1 = new SalarySlip(mapOfCellsValue);
 
 		salarySlips.add(salarySlip1);
-
-		System.out.println(salarySlips.get(0).getName());
-		System.out.println(salarySlips.get(0).getBasic());
-		
 
 		RenderService renderService = new RenderService();
 		renderService.renderPDF(salarySlips);
