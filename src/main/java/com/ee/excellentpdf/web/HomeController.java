@@ -49,7 +49,7 @@ public class HomeController {
     @ResponseBody
     String sendEmail() {
         final String emailId = "mdeshmukh@equalexperts.com";
-        emailService.sendMail(new File("/home/mrugen/Downloads/sal.pdf"), emailId, "Salary For This Month", "Hi User hope you get paid!!!");
+        emailService.sendMail(new File("/home/mrugen/Downloads/Rashmi.Parab.pdf"), emailId, "Salary For This Month", "Hi User hope you get paid!!!");
         return "sent email to " + emailId;
     }
 }

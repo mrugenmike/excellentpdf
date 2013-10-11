@@ -25,7 +25,7 @@ success: function()
 complete: function(response)
             {
 
-                $("#message").html("<font color='green'>"+response.responseText+"</font>");
+                $("#message").html("<font color='green'>Salary Slips Generated</font>");
             },
 error: function()
             {
