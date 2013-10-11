@@ -22,5 +22,8 @@ public class GmailEmailServiceTest {
         File salarySlip = new File("src/test/resources/salarySlip.pdf");
         final boolean sent = service.sendMail(salarySlip, "rraut@equalexperts.com", "Salary Slip", "\n Hello renuka!!\n");
         //Assert.assertTrue(sent);
+         assert sent == true;
+
+
     }
 }
