@@ -38,8 +38,6 @@ public class RenderService {
 			PdfWriter.getInstance(document, new FileOutputStream(FILE));
 			document.open();
 			addMetaData(document);
-			// addTitlePage(document);
-			System.out.println(salarySlips.get(0).getName());
 			addContent(document, salarySlips);
 			document.close();
 		} catch (Exception e) {
@@ -48,7 +46,7 @@ public class RenderService {
 
 	}
 
-	private static void addContent(Document document,
+	private void addContent(Document document,
 			List<SalarySlip> salarySlips) throws DocumentException {
 		Anchor anchor = new Anchor("Salary Slip", catFont);
 		anchor.setName("SALARY SLIP");
@@ -57,17 +55,12 @@ public class RenderService {
 
 	}
 
-	private static void createTable(Document document,
+	private void createTable(Document document,
 			List<SalarySlip> salarySlips) throws DocumentException {
 
 		for (SalarySlip salarySlip : salarySlips) {
 
 			PdfPTable table = new PdfPTable(2);
-
-			// t.setBorderColor(BaseColor.GRAY);
-			// t.setPadding(4);
-			// t.setSpacing(4);
-			// t.setBorderWidth(1);
 
 			PdfPCell c1 = new PdfPCell(new Phrase("Particulars",subFont));
 			 c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -80,14 +73,29 @@ public class RenderService {
 			table.addCell(c1);
 			
 
-			table.addCell("NAME");
-			
+			table.addCell("Employee Name");			
 			table.addCell(salarySlip.getName());
+
+			table.addCell("Bank A/C No");
+			table.addCell((salarySlip.getBankAccountNumber()).toString());
+
+			table.addCell("Days Worked");			
+			table.addCell(salarySlip.getDaysPresent().toString());
+
 			table.addCell("Basic Pay");
 			table.addCell((salarySlip.getBasic()).toString());
 			
 			table.addCell("HRA");
 			table.addCell((salarySlip.getHra()).toString());
+
+			table.addCell("LTA");
+			table.addCell((salarySlip.getLta().toString()));
+			
+			table.addCell("Conveyance Allowance");
+			table.addCell((salarySlip.getConveyanceAllowance()).toString());
+			
+			table.addCell("Monthly CTC");
+			table.addCell((salarySlip.getMonthlyCTC()).toString());
 
 			document.add(table);
 		}
