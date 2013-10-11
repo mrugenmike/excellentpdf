@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class ExcelServiceImpl implements ExcelService {
-    @Override
     public List<SalarySlip> fetchSalarySlips(File excelFile) throws IOException {
         FileInputStream input_document = new FileInputStream(excelFile);
         HSSFWorkbook workBook = new HSSFWorkbook(input_document);
