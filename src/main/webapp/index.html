@@ -1,23 +1,40 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/ass8.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="js/form.js"></script>
 </head>
-<body>
 <div class="header">
     <div class="logoText"></div>
     <div class="logo"></div>
 </div>
-<div class="wrapper">
-    <h4>Upload Your Excel file To Genrate PDF as per sheet</h4>
-    <INPUT type="file" class="browse"/>
-    <input type="button" class="btn" value="GENRATE PDF"/>
-    <ul>
-        <li>Renuka.pdf</li>
-        <li>Renuka.pdf</li>
-        <li>Renuka.pdf</li>
-        <li>Renuka.pdf</li>
-    </ul>
+<style>
+    form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
+    #progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+    #bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+    #percent { position:absolute; display:inline-block; top:3px; left:48%; }
+</style>
+</head>
+<body>
+<h1>Ajax File Upload Demo</h1>
+
+<form id="myForm" action="upload" method="post" enctype="multipart/form-data">
+    <input type="file" size="60" name="file">
+    <input type="submit" value="Upload For Conversion">
+</form>
+
+<div id="progress">
+    <div id="bar"></div>
+    <div id="percent">0%</div >
+</div>
+<br/>
+
+<div id="message"></div>
+
+
     <input type="button" class="btn" value="SEND MAIL TO ALL"/>
+
 </div>
 </body>
 </html>
