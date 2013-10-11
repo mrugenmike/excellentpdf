@@ -88,7 +88,7 @@ public class RenderService {
 			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(c1);
 
-			c1 = new PdfPCell(new Phrase("Rs.",subFont));
+			c1 = new PdfPCell(new Phrase("",subFont));
 			 c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(c1);
