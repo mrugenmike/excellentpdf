@@ -40,8 +40,9 @@ public class HomeController {
         File file = new File(excelFile.getName());
         excelFile.transferTo(file);
         final List<SalarySlip> salarySlips = excelService.fetchSalarySlips(file);
+        final List<String> personNames = renderService.renderPDF(salarySlips);
 
-        return salarySlips.toString();
+        return personNames.toString();
     }
 
     @RequestMapping(value = "/email")
