@@ -11,13 +11,9 @@ import java.io.IOException;
 @Controller
 public class HomeController {
 
-  @RequestMapping("/")
-    public String goHome() throws IOException {
-      return "home";
-  }
-
     @RequestMapping("/upload")
     public String convertToPDf(MultipartFile file){
+
         return "home";
     }
 }
