@@ -6,6 +6,7 @@ import com.ee.excellentpdf.email.EmailService;
 import com.ee.excellentpdf.reader.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,12 @@ public class HomeController {
     private RenderService renderService;
     private EmailService emailService;
 
+    @Value("${email}")
+    private String emailId;
+
+    @Value("${path}")
+    private String path;
+
     @Autowired
     public HomeController(ExcelService excelService, RenderService renderService, EmailService emailService) {
         this.excelService = excelService;
@@ -41,7 +48,7 @@ public class HomeController {
         File file = new File(excelFile.getName());
         excelFile.transferTo(file);
         final List<SalarySlip> salarySlips = excelService.fetchSalarySlips(file);
-        final List<String> personNames = renderService.renderPDF(salarySlips);
+        final List<String> personNames = renderService.renderPDF(salarySlips, path);
 
         return personNames.toString();
     }
@@ -50,30 +57,17 @@ public class HomeController {
     public
     @ResponseBody
     String sendEmail() {
-        // final String emailId = "mdeshmukh@equalexperts.com";
-        final String emailId = "excellentpdfrecepient@gmail.com";
-        // password: EEAdmin@890
-        // String path = "D:/SalarySlips";      // For windows
-        String path = "/home/mrugen/Desktop/uploads";
-
-        String fileName = "";
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++)
         {
-
             if (listOfFiles[i].isFile())
             {
-                fileName = listOfFiles[i].getName();
-                //System.out.println(fileName);
-                File file = new File(path+"/"+fileName);
-                //System.out.println(fileName.split(".")[0]);
+                File file = new File(path+"/"+listOfFiles[i].getName());
                 emailService.sendMail(file, emailId, "Salary For This Month", "Hi User, hope you get paid!!!");
             }
         }
-
-        //emailService.sendMail(new File("/home/mrugen/Downloads/Rashmi.Parab.pdf"), emailId, "Salary For This Month", "Hi User hope you get paid!!!");
         return emailId;
     }
 }

@@ -20,5 +20,7 @@
         <property name="maxUploadSize" value="100000"/>
     </bean>
 
+    <context:property-placeholder location="classpath*:pathsAndEmail.properties"/>
+
 
 </beans>

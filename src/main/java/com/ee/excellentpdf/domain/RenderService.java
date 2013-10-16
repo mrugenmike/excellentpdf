@@ -37,18 +37,16 @@ public class RenderService {
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
 
-	public List<String> renderPDF(List<SalarySlip> salarySlips) {
+	public List<String> renderPDF(List<SalarySlip> salarySlips, String path) {
 
         List<String> filenames = new ArrayList<String>();
         try {
-            String path = "/home/mrugen/Desktop/uploads/";
-            // String path = "D:/SalarySlips/";
             FileUtils.cleanDirectory(new File(path));
             for (SalarySlip salarySlip : salarySlips) {
                 String filename  = salarySlip.getName();
                 String[] temp = filename.split(" ");
                 filenames.add(filename);
-                String FILE = path +temp[0]+"."+temp[1]+".pdf";
+                String FILE = path+"/" +temp[0]+"."+temp[1]+".pdf";
 
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(FILE));
@@ -130,27 +128,5 @@ public class RenderService {
 		document.addKeywords("Java, PDF, iText");
 		document.addAuthor("Lars Vogel");
 		document.addCreator("Lars Vogel");
-	}
-
-	public static void main(String[] args) {
-		ArrayList<SalarySlip> salarySlips = new ArrayList<SalarySlip>();
-
-		Map<String, Object> mapOfCellsValue = new HashMap<String, Object>();
-		mapOfCellsValue.put("Name", "Rashmi Parab");
-		mapOfCellsValue.put("Basic", 400.00);
-		mapOfCellsValue.put("HRA", 8000.00);
-		mapOfCellsValue.put("Con Allow",800.00);
-		mapOfCellsValue.put("Bank A/c No", "235326445.00");
-		mapOfCellsValue.put("LTA", 8000.00);
-		mapOfCellsValue.put("Monthly CTC", 346878.00);
-		mapOfCellsValue.put("Days Present",35.0);
-
-		SalarySlip salarySlip1 = new SalarySlip(mapOfCellsValue);
-
-		salarySlips.add(salarySlip1);
-
-		RenderService renderService = new RenderService();
-		renderService.renderPDF(salarySlips);
-
 	}
 }
