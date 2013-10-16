@@ -1,7 +1,9 @@
 package com.ee.excellentpdf.domain;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,30 +39,26 @@ public class RenderService {
 
 	public List<String> renderPDF(List<SalarySlip> salarySlips) {
 
-		List<String> filenames = new ArrayList<String>();
-		try {
-			for (SalarySlip salarySlip : salarySlips) {
-				
-			
+        List<String> filenames = new ArrayList<String>();
+        try {
+            String path = "/home/mrugen/Desktop/uploads/";
+            // String path = "D:/SalarySlips/";
+            FileUtils.cleanDirectory(new File(path));
+            for (SalarySlip salarySlip : salarySlips) {
+                String filename  = salarySlip.getName();
+                String[] temp = filename.split(" ");
+                filenames.add(filename);
+                String FILE = path +temp[0]+"."+temp[1]+".pdf";
 
-			String filename  = salarySlip.getName();
-			String[] temp = filename.split(" ");
-			filenames.add(filename);
-			System.out.println("temp1"+temp[0]);
-			System.out.println("temp1"+temp[1]);
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(FILE));
+                document.open();
+                addMetaData(document);
+                addContent(document, salarySlip);
+                document.close();
 
-            String FILE = "/home/mrugen/Desktop/uploads/"+temp[0]+"."+temp[1]+".pdf";
-			// String FILE = "D:/SalarySlips/"+temp[0]+"."+temp[1]+".pdf";  // For windows
-			
-			Document document = new Document();
-			PdfWriter.getInstance(document, new FileOutputStream(FILE));
-			document.open();
-			addMetaData(document);
-			addContent(document, salarySlip);
-			document.close();
-			
-			System.out.println(filenames);
-			}
+                System.out.println(filenames);
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
