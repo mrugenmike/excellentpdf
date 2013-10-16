@@ -47,8 +47,9 @@ public class RenderService {
 			filenames.add(filename);
 			System.out.println("temp1"+temp[0]);
 			System.out.println("temp1"+temp[1]);
-			
-			 String FILE = "/home/mrugen/Desktop/uploads/"+temp[0]+"."+temp[1]+".pdf";
+
+            String FILE = "/home/mrugen/Desktop/uploads/"+temp[0]+"."+temp[1]+".pdf";
+			// String FILE = "D:/SalarySlips/"+temp[0]+"."+temp[1]+".pdf";  // For windows
 			
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(FILE));

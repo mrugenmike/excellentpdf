@@ -18,6 +18,7 @@ public class ExcelServiceImpl implements ExcelService {
     public List<SalarySlip> fetchSalarySlips(File excelFile) throws IOException {
         FileInputStream input_document = new FileInputStream(excelFile);
         HSSFWorkbook workBook = new HSSFWorkbook(input_document);
+        
         final HSSFSheet masterSheet = workBook.getSheetAt(0);
         final int firstRowNum = masterSheet.getFirstRowNum();
         final HSSFRow firstRow = masterSheet.getRow(firstRowNum);

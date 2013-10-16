@@ -46,7 +46,7 @@ public class GmailEmailService implements EmailService {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailId));
             message.setSubject(subject);
-            message.setText(body);
+            //message.setText(body);
             final Multipart multipart = new MimeMultipart();
 
             final MimeBodyPart messageBodyPart = new MimeBodyPart();

@@ -42,7 +42,7 @@ $("#myForm").ajaxForm(options);
 function sendEmail(){
     $.ajax({
         url:"email"
-    }).done(function(){
-           $("#message").html("<b>Mail Sent</b>")
+    }).done(function(emailAddress){
+           $("#message").html("<b>E-Mail Sent to " +emailAddress+ "</b>")
         });
 }

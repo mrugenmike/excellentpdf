@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -50,7 +51,28 @@ public class HomeController {
     @ResponseBody
     String sendEmail() {
         final String emailId = "mdeshmukh@equalexperts.com";
-        emailService.sendMail(new File("/home/mrugen/Downloads/Rashmi.Parab.pdf"), emailId, "Salary For This Month", "Hi User hope you get paid!!!");
-        return "sent email to " + emailId;
+
+        // String path = "D:/SalarySlips";      // For windows
+        String path = "/home/mrugen/Desktop/uploads";
+
+        String fileName = "";
+        File folder = new File(path);
+        File[] listOfFiles = folder.listFiles();
+
+        for (int i = 0; i < listOfFiles.length; i++)
+        {
+
+            if (listOfFiles[i].isFile())
+            {
+                fileName = listOfFiles[i].getName();
+                //System.out.println(fileName);
+                File file = new File(path+"/"+fileName);
+                //System.out.println(fileName.split(".")[0]);
+                emailService.sendMail(file, emailId, "Salary For This Month", "Hi User, hope you get paid!!!");
+            }
+        }
+
+        //emailService.sendMail(new File("/home/mrugen/Downloads/Rashmi.Parab.pdf"), emailId, "Salary For This Month", "Hi User hope you get paid!!!");
+        return emailId;
     }
 }
