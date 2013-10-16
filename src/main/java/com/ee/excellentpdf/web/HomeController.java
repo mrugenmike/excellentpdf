@@ -50,8 +50,9 @@ public class HomeController {
     public
     @ResponseBody
     String sendEmail() {
-        final String emailId = "mdeshmukh@equalexperts.com";
-
+        // final String emailId = "mdeshmukh@equalexperts.com";
+        final String emailId = "excellentpdfrecepient@gmail.com";
+        // password: EEAdmin@890
         // String path = "D:/SalarySlips";      // For windows
         String path = "/home/mrugen/Desktop/uploads";
 
