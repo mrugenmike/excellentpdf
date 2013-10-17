@@ -38,7 +38,7 @@ error: function()
 $("#myForm").ajaxForm(options);
 
 });
-                                                          \
+
 function sendEmail(){
 	$("#message").html("Emailing all Salary Slips..")
     $.ajax({
