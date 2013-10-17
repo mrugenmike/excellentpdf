@@ -38,11 +38,12 @@ error: function()
 $("#myForm").ajaxForm(options);
 
 });
-
+                                                          \
 function sendEmail(){
+	$("#message").html("Emailing all Salary Slips..")
     $.ajax({
         url:"email"
-    }).done(function(emailAddress){
-           $("#message").html("<b>E-Mail Sent to " +emailAddress+ "</b>")
+    }).done(function(message){
+           $("#message").html("<b>" +message+ "</b>")
         });
 }

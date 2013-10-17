@@ -59,15 +59,19 @@ public class HomeController {
     String sendEmail() {
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
+        int numberOfFiles =  listOfFiles.length;
+        if(numberOfFiles <= 0){
+            return "There are no files to email.";
+        }
 
-        for (int i = 0; i < listOfFiles.length; i++)
+        for (int i = 0; i < numberOfFiles; i++)
         {
             if (listOfFiles[i].isFile())
             {
                 File file = new File(path+"/"+listOfFiles[i].getName());
-                emailService.sendMail(file, emailId, "Salary For This Month", "Hi User, hope you get paid!!!");
+                emailService.sendMail(file, emailId, "Salary Slip", "Hi User, hope you get paid!!!");
             }
         }
-        return emailId;
+        return "E-Mail Sent to "+ emailId;
     }
 }
