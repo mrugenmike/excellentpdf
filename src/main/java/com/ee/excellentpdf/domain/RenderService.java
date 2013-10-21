@@ -46,7 +46,7 @@ public class RenderService {
                 String filename  = salarySlip.getName();
                 String[] temp = filename.split(" ");
                 filenames.add(filename);
-                String FILE = path+"/" +temp[0]+"."+temp[1]+".pdf";
+                String FILE = path+"/" +temp[0]+"."+temp[1]+"_"+salarySlip.getMonth()+".pdf";
 
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(FILE));
@@ -54,8 +54,6 @@ public class RenderService {
                 addMetaData(document);
                 addContent(document, salarySlip);
                 document.close();
-
-                System.out.println(filenames);
             }
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +94,9 @@ public class RenderService {
 
 			table.addCell("Employee Name");			
 			table.addCell(salarySlip.getName());
+
+            table.addCell("Email");
+			table.addCell(salarySlip.getEmail());
 
 			table.addCell("Bank A/C No");
 			table.addCell((salarySlip.getBankAccountNumber()).toString());

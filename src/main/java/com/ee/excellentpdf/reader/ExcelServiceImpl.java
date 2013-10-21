@@ -1,9 +1,13 @@
 package com.ee.excellentpdf.reader;
 
 import com.ee.excellentpdf.domain.SalarySlip;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.format.CellDateFormatter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.stereotype.Component;
 
@@ -37,12 +41,29 @@ public class ExcelServiceImpl implements ExcelService {
             int columnIndex = 0;
             while (cellIter.hasNext()){
                 final Cell cell = cellIter.next();
-                mapOfCellsValue.put(columnFields.get(cell.getColumnIndex()),getCellValue(cell));
+                Object cellValue = getCellValue(cell);
+                if (isCellValueDate(cell)) {
+                    cellValue = getDateFrom(cell);
+                }
+                mapOfCellsValue.put(columnFields.get(cell.getColumnIndex()), cellValue);
             }
             slips.add(new SalarySlip(mapOfCellsValue));
         }
 
         return slips;
+    }
+
+    private Object getDateFrom(Cell cell) {
+        Date date = HSSFDateUtil
+                .getJavaDate(cell.getNumericCellValue());
+        String dateFormat = cell.getCellStyle()
+                .getDataFormatString();
+        return new CellDateFormatter(dateFormat)
+                .format(date);
+    }
+
+    private boolean isCellValueDate(Cell cell) {
+        return (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
     private Object getCellValue(Cell cell){

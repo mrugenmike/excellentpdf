@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class SalarySlip {
     private String name;
-    private Double month;
+    private String month;
     private Double daysInMonth;
     private Double daysPresent;
     private String designation;
@@ -30,7 +30,7 @@ public class SalarySlip {
 
     public SalarySlip(Map<String, Object> mapOfCellsValue) {
         this.name = (String)mapOfCellsValue.get("Name");
-        this.month = (Double) mapOfCellsValue.get("Month");
+        this.month = (String) mapOfCellsValue.get("Month");
         this.email = (String) mapOfCellsValue.get("Email");
         this.daysInMonth = (Double) mapOfCellsValue.get("Days in a month");
         this.daysPresent=(Double) mapOfCellsValue.get("Days Present");
@@ -65,7 +65,7 @@ public class SalarySlip {
         return email;
     }
 
-    public Double getMonth() {
+    public String getMonth() {
         return month;
     }
 
