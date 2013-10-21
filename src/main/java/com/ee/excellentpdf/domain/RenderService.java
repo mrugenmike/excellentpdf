@@ -45,8 +45,8 @@ public class RenderService {
             for (SalarySlip salarySlip : salarySlips) {
                 String filename  = salarySlip.getName();
                 String[] temp = filename.split(" ");
-                filenames.add(filename);
                 String FILE = path+"/" +temp[0]+"."+temp[1]+"_"+salarySlip.getMonth()+".pdf";
+                filenames.add(FILE);
 
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(FILE));
@@ -130,4 +130,12 @@ public class RenderService {
 		document.addAuthor("Lars Vogel");
 		document.addCreator("Lars Vogel");
 	}
+
+    public String getFileNames(List<String> files) {
+        List<String> filenames = new ArrayList<String>();
+        for(String file: files){
+            filenames.add(file.split("/")[2].split("_")[0].replace("."," "));
+        }
+        return filenames.toString();
+    }
 }
