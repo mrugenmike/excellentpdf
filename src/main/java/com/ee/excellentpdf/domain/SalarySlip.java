@@ -26,10 +26,12 @@ public class SalarySlip {
     private Double tds;
     private Double totalDeduction;
     private Double totalSalary;
+    private String email;
 
     public SalarySlip(Map<String, Object> mapOfCellsValue) {
         this.name = (String)mapOfCellsValue.get("Name");
         this.month = (Double) mapOfCellsValue.get("Month");
+        this.email = (String) mapOfCellsValue.get("Email");
         this.daysInMonth = (Double) mapOfCellsValue.get("Days in a month");
         this.daysPresent=(Double) mapOfCellsValue.get("Days Present");
         this.designation = (String) mapOfCellsValue.get("Designation");
@@ -57,6 +59,10 @@ public class SalarySlip {
 
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Double getMonth() {
