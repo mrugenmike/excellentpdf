@@ -49,10 +49,20 @@ public class HomeController {
         excelFile.transferTo(file);
         final List<SalarySlip> salarySlips = excelService.fetchSalarySlips(file);
         final Map<String,String> emailAndFiles = renderService.renderPDF(salarySlips, path);
+
+        if(areEmailAddressesUnique(salarySlips, emailAndFiles)){
+            return "Salary Slips generated but could not email. Email ids provided should be unique.";
+        }
+
         if("uploadAndEmail".equals(task)){
             emailService.sendEmailToAll(emailAndFiles, emailSubject, emailBody);
+            return "Salary Slips Generated for "+renderService.getFileNames(emailAndFiles)+". Also slips have been sent to respective employees by email.";
         }
-        return renderService.getFileNames(emailAndFiles);
+        return "Salary Slips Generated for "+renderService.getFileNames(emailAndFiles);
+    }
+
+    private boolean areEmailAddressesUnique(List<SalarySlip> salarySlips, Map<String, String> emailAndFiles) {
+        return (salarySlips.size() != emailAndFiles.size());
     }
 
     @RequestMapping(value = "/email")

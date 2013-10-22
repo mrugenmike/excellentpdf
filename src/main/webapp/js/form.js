@@ -25,11 +25,11 @@ success: function()
 complete: function(response)
             {
 
-                $("#message").html("<font color='green'>Salary Slips Generated for <br>" +response.responseText+"</font>");
+                $("#message").html(response.responseText);
             },
 error: function()
             {
-                $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+                $("#message").html("ERROR: unable to upload files");
 
                 }
 
@@ -44,6 +44,6 @@ function sendEmail(){
     $.ajax({
         url:"email"
     }).done(function(message){
-           $("#message").html("<b>" +message+ "</b>")
+           $("#message").html(message)
         });
 }
