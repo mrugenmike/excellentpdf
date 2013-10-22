@@ -1,7 +1,5 @@
 package com.ee.excellentpdf.email;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.activation.DataHandler;
@@ -13,6 +11,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
+import java.util.Map;
 import java.util.Properties;
 
 @Component
@@ -63,6 +62,12 @@ public class GmailEmailService implements EmailService {
             return false;
         }
         return true;
+    }
+
+    public void sendEmailToAll(Map<String, String> emailAndFiles, String emailBody, String emailSubject) {
+        for (String email: emailAndFiles.keySet()){
+            sendMail(new File(emailAndFiles.get(email)), email, emailSubject, emailBody);
+        }
     }
 }
 

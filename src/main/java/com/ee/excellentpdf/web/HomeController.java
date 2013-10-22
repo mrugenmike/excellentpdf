@@ -9,16 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @Controller
@@ -33,6 +31,8 @@ public class HomeController {
 
     @Value("${path}")
     private String path;
+    private String emailSubject;
+    private String emailBody;
 
     @Autowired
     public HomeController(ExcelService excelService, RenderService renderService, EmailService emailService) {
@@ -44,13 +44,15 @@ public class HomeController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public
     @ResponseBody
-    String convertToPDf(@RequestPart("file") MultipartFile excelFile) throws IOException {
+    String convertToPDf(@RequestPart("file") MultipartFile excelFile, @ModelAttribute("task") String task) throws IOException {
         File file = new File(excelFile.getName());
         excelFile.transferTo(file);
         final List<SalarySlip> salarySlips = excelService.fetchSalarySlips(file);
-        final List<String> files = renderService.renderPDF(salarySlips, path);
-
-        return renderService.getFileNames(files);
+        final Map<String,String> emailAndFiles = renderService.renderPDF(salarySlips, path);
+        if("uploadAndEmail".equals(task)){
+            emailService.sendEmailToAll(emailAndFiles, emailSubject, emailBody);
+        }
+        return renderService.getFileNames(emailAndFiles);
     }
 
     @RequestMapping(value = "/email")
@@ -69,7 +71,9 @@ public class HomeController {
             if (listOfFiles[i].isFile())
             {
                 File file = new File(path+"/"+listOfFiles[i].getName());
-                emailService.sendMail(file, emailId, "Salary Slip", "Hi User, hope you get paid!!!");
+                emailSubject = "Salary Slip";
+                emailBody = "Hi User, hope you get paid!!!";
+                emailService.sendMail(file, emailId, emailSubject, emailBody);
             }
         }
         return "E-Mail Sent to "+ emailId;

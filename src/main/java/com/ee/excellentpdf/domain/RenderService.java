@@ -37,16 +37,16 @@ public class RenderService {
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
 
-	public List<String> renderPDF(List<SalarySlip> salarySlips, String path) {
+	public Map<String,String> renderPDF(List<SalarySlip> salarySlips, String path) {
 
-        List<String> filenames = new ArrayList<String>();
+        Map<String,String> filenames = new HashMap<String, String>();
         try {
             FileUtils.cleanDirectory(new File(path));
             for (SalarySlip salarySlip : salarySlips) {
                 String filename  = salarySlip.getName();
                 String[] temp = filename.split(" ");
                 String FILE = path+"/" +temp[0]+"."+temp[1]+"_"+salarySlip.getMonth()+".pdf";
-                filenames.add(FILE);
+                filenames.put(salarySlip.getEmail(), FILE);
 
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(FILE));
@@ -131,9 +131,9 @@ public class RenderService {
 		document.addCreator("Lars Vogel");
 	}
 
-    public String getFileNames(List<String> files) {
+    public String getFileNames(Map<String, String> files) {
         List<String> filenames = new ArrayList<String>();
-        for(String file: files){
+        for(String file: files.values()){
             filenames.add(file.split("/")[2].split("_")[0].replace("."," "));
         }
         return filenames.toString();
