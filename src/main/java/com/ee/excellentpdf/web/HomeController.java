@@ -83,7 +83,8 @@ public class HomeController {
                 File file = new File(path+"/"+listOfFiles[i].getName());
                 emailSubject = "Salary Slip";
                 emailBody = "Hi User, hope you get paid!!!";
-                emailService.sendMail(file, emailId, emailSubject, emailBody);
+                boolean isEmailSent = emailService.sendMail(file, emailId, emailSubject, emailBody);
+                //if(!isEmailSent) return "Due to some error email cannot be sent. Please check.";
             }
         }
         return "E-Mail Sent to "+ emailId;
